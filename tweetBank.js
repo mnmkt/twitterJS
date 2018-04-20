@@ -1,12 +1,13 @@
 'use strict'
 
 const _ = require('lodash');
-
+let id = 0;
 let data = [];
 
 
 function add (name, content) {
-  data.push({ name: name, content: content });
+  id++;
+  data.push({ name: name, content: content, id: data.length });
 }
 
 function list () {
