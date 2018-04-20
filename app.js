@@ -6,8 +6,8 @@ const routes = require('./routes');
 const fs = require('fs');
 const path = require('path');
 const mime = require('mime');
-
 const logger = morgan('dev');
+const bodyParser = require('body-parser');
 
 
 // nunjucks boilerplate:
@@ -20,6 +20,9 @@ app.use(morgan('dev'));
 
 //the typical way to use express middleware;
 app.use(express.static(__dirname + '/public'));
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 //Same as the line above
 // app.use(function(req, res, next){
