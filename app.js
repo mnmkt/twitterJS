@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const nunjucks = require('nunjucks');
+const routes = require('./routes');
 
 const logger = morgan('dev');
 
@@ -11,27 +12,12 @@ nunjucks.configure('views', {noCache: true}); // one extra step in nunjucks, to 
 app.set('view engine', 'html');
 app.engine('html', nunjucks.render);
 
+//app.use = middleware function
 app.use(morgan('dev'));
-
-//app.use takes middleware function
-// app.use(function(req, res, next){
-
-// });
-
-app.get('/', function(req, res){
-  res.send('you got the root route')
-});
+app.use('/', routes);
 
 
-app.get('/news', function(req, res, next){
-  res.jason({ name: 'newsRoute', date:12345 });
-});
-
-// app.use(function(req, res, next){
-
-// })
-
-// app.listen(1337, function(){
-//   response.send('here is some html')
-// })
+app.listen(1337, function(){
+  console.log('listening on port 1337');
+})
 
